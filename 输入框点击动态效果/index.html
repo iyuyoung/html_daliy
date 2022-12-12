@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>输入框点击动态效果</title>
+    <style>
+         /* 修改默认配置 根据需要添加，正式代码在下面 */
+         html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        @font-face {
+            font-family: AlimamaShuHeiTi-Bold;
+            src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.eot) format('embedded-opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.otf) format('opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf) format('TrueType'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff) format('woff'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff2) format('woff2');
+        }
+
+        html,
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            background: #121212;
+            color: white;
+            font-family: AlimamaShuHeiTi-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: initial;
+            letter-spacing: initial;
+            min-height: 704px
+        }
+
+        button {
+            font-family: AlimamaShuHeiTi-Bold
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        *::-moz-selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+
+        *::selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+        /* 正式代码开始 */
+        .wrap {
+            align-content: flex-start;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+            margin: 30px 0px;
+            font-family: "Philosopher";
+            font-weight: 700;
+            margin-bottom: 0px;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            padding: 20px;
+            
+        }
+
+        .input{
+            position: relative;
+        }
+
+        input {
+            width: 250px;
+            color: white;
+            font-size: inherit;
+            font-family: inherit;
+            background-color: hsl(236, 32%, 26%);
+            padding: 0.35em 0.45em;
+            border: 1px solid transparent;
+            transition: background-color 0.3s ease-in-out;
+            height: 50px;
+            line-height: 50px;
+            font-family: AlimamaShuHeiTi-Bold;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input::placeholder {
+            color: hsla(0, 0%, 100%, 0.6);
+        }
+
+        .effect span {
+            position: absolute;
+            background-color: #fc2f70;
+            transform-origin: center;
+            transition: transform 0.5s ease;
+        }
+
+        .bottom,
+        .top {
+            height: 1px;
+            left: 0;
+            right: 0;
+            transform: scaleX(0);
+        }
+
+        .left,
+        .right {
+            width: 1px;
+            top: 0;
+            bottom: 0;
+            transform: scaleY(0);
+        }
+
+        .top {
+            top: 0;
+        }
+
+        .bottom {
+            bottom: 0;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            right: 0;
+        }
+
+        input:focus~.top,
+        input:focus~.bottom {
+            transform: scaleX(1);
+        }
+
+        input:focus~.left,
+        input:focus~.right {
+            transform: scaleY(1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 标题 -->
+        <div class="title">
+            <span>输入框点击动态效果</span>
+        </div>
+        <!-- 展示效果 -->
+        <div class="effect">
+           <div class="input">
+                <input type="text" placeholder="请输入姓名">
+                <span class="bottom"></span>
+                <span class="right"></span>
+                <span class="top"></span>
+                <span class="left"></span>
+           </div>
+        </div>
+    </div>
+
+</body>
+</html>
