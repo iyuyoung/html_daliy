@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>闪亮的玻璃悬停效果</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3711888_44t1dx530kg.css">
+    <style>
+        body{background-color: #101010;}
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wrap {
+            align-content: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .result{
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 20px 50px 0px rgb(255 255 255 / 10%);
+            backdrop-filter: blur(2px);
+            transition: 0.5s;
+            overflow: hidden;
+        }
+
+       
+
+        .result::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: skewX(45deg) translateX(150px);
+            transition: 0.5s;
+        }
+
+        .result:hover::before {
+            transform: skewX(45deg) translateX(-150px);
+            transition: 1s;
+        }
+        .result:hover {
+            transform: translateY(-20px);
+        }
+        .result i{font-size: 60px}
+
+        .code {
+            padding: 25px 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .code img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 展示效果 -->
+        <div class="effect">
+            <a href="https://github.com/iyuyoung" class="result">
+                <i class="iconfont icon-github"></i>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
