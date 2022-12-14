@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>CSS 登录框输入动画</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <style>
+         /* 修改默认配置 根据需要添加，正式代码在下面 */
+         html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        @font-face {
+            font-family: AlimamaShuHeiTi-Bold;
+            src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.eot) format('embedded-opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.otf) format('opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf) format('TrueType'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff) format('woff'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff2) format('woff2');
+        }
+
+        html,
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            background: #121212;
+            color: white;
+            font-family: AlimamaShuHeiTi-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: initial;
+            letter-spacing: initial;
+            min-height: 704px
+        }
+
+        button {
+            font-family: AlimamaShuHeiTi-Bold
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        *::-moz-selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+
+        *::selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wrap {
+            align-content: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            padding: 0px 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px 40px;
+            overflow: hidden;
+        }
+
+        .screen {
+            background: linear-gradient(90deg, #009688, #42ffed);
+            position: relative;
+            height: 600px;
+            width: 360px;
+        }
+
+        .screen__content {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+        }
+
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+        }
+
+        .screen__background span {
+            transform: rotate(45deg);
+            position: absolute;
+        }
+
+        .screen__background span:first-child {
+            height: 520px;
+            width: 520px;
+            background: #FFF;
+            top: -50px;
+            right: 120px;
+            border-radius: 0 72px 0 0;
+            z-index: 1;
+        }
+
+        .screen__background span:nth-child(2) {
+            height: 220px;
+            width: 220px;
+            background: #3ebeb2;
+            top: -172px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background span:nth-child(3) {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(240deg, #009688, #00aa99, #03ae9d, #07af9e, #35e5d4);
+            top: -24px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background span:last-child {
+            height: 400px;
+            width: 200px;
+            background: #3ebeb2;
+            top: 420px;
+            right: 50px;
+            border-radius: 60px;
+        }
+
+      
+
+        .login {
+            width: 100%;
+            padding: 30px;
+            padding-top: 40%;
+        }
+
+        .login_field {
+            padding: 20px 0px;
+            position: relative;
+        }
+
+        .login_input {
+            border: none;
+            border-bottom: 2px solid #D1D1D4;
+            background: none;
+            padding: 10px 0px;
+            font-weight: 700;
+            width: 75%;
+            transition: .2s;
+            outline: none;
+        }
+
+        .login_field span {
+            color: rgb(159, 159, 159);
+            position: absolute;
+            left: 0;
+            padding: 9px 0px;
+            text-transform: uppercase;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: .5s;
+            pointer-events: none;
+            font-size: 1em;
+        }
+
+        .login_input:valid~span,
+        .login_input:focus~span {
+            color: #009688;
+            transform: translateY(-25px);
+            font-size: 0.85em;
+        }
+
+        .login_input:valid,
+        .login_input:focus {
+            border-bottom: 2px solid #009688;
+        }
+
+        .login_submit {
+            background: #fff;
+            font-size: 17px;
+            margin-top: 30px;
+            padding: 5px 20px;
+            border-radius: 26px;
+            border: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            width: 75%;
+            color: #009688;
+            box-shadow: 0px 0px 20px #009688;
+            cursor: pointer;
+            transition: .2s;
+            height: 40px;
+            line-height: 40px;
+            justify-content: center;
+            animation: animate 2s linear infinite;
+        }
+
+
+        .social-login {
+            position: absolute;
+            height: 140px;
+            width: 160px;
+            text-align: center;
+            bottom: 0px;
+            right: 0px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 标题 -->
+        <div class="title">
+            <span>登录框输入动画</span>
+        </div>
+        <!-- 展示效果 -->
+        <div class="effect">
+            <div class="container">
+                <div class="screen">
+                    <div class="screen__content">
+                        <form class="login">
+                            <div class="login_field">
+                                <input type="text" class="login_input" required="required">
+                                <span>账户</span>
+                            </div>
+                            <div class="login_field">
+                                <input type="password" class="login_input" required="required">
+                                <span class="button_text">密码</span>
+                            </div>
+                            <button class="button login_submit">
+                                登录
+                            </button>
+                        </form>
+                        <div class="social-login">
+                            <h3>去注册</h3>
+                        </div>
+                    </div>
+                    <div class="screen__background">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
