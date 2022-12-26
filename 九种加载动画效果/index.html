@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>CSS九种加载动画</title>
+    <style>
+         /* 修改默认配置 根据需要添加，正式代码在下面 */
+         html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        @font-face {
+            font-family: AlimamaShuHeiTi-Bold;
+            src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.eot) format('embedded-opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.otf) format('opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf) format('TrueType'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff) format('woff'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff2) format('woff2');
+        }
+
+        html,
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            background: #121212;
+            color: white;
+            font-family: AlimamaShuHeiTi-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: initial;
+            letter-spacing: initial;
+            min-height: 704px
+        }
+
+        button {
+            font-family: AlimamaShuHeiTi-Bold
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        *::-moz-selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+
+        *::selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wrap {
+            align-content: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            position: relative;
+            margin: auto;
+        }
+
+        .loading {
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .loading .item {
+            padding: 5px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-1 {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            animation: rotation 1s linear infinite;
+        }
+
+        .loader-1:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-bottom-color: red;
+        }
+
+        .loader-2 {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .loader-2::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 2px solid #FF3D00;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: rotation 2s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .loader-2::before {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 2px solid #fff;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: rotation 2s ease-in-out infinite;
+        }
+
+        .loader-3 {
+            width: 48px;
+            height: 48px;
+            display: inline-block;
+            position: relative;
+            background: #FFF;
+            animation: zero 1s ease infinite alternate-reverse;
+        }
+
+        .loader-4 {
+            width: 10px;
+            height: 40px;
+            border-radius: 4px;
+            display: inline-block;
+            position: relative;
+            background: currentColor;
+            color: #fff;
+            animation: animloader 0.3s 0.3s linear infinite alternate;
+        }
+
+        .loader-4::after,
+        .loader-4::before {
+            content: '';
+            width: 10px;
+            height: 40px;
+            border-radius: 4px;
+            background: currentColor;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 20px;
+            animation: animloader 0.3s 0.45s linear infinite alternate;
+        }
+
+        .loader-4::before {
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .loader-5 {
+            width: 20px;
+            height: 45px;
+            display: inline-block;
+            position: relative;
+            background: radial-gradient(ellipse at center, #FFF 69%, rgba(0, 0, 0, 0) 70%), linear-gradient(to right, rgba(0, 0, 0, 0) 47%, #FFF 48%, #FFF 52%, rgba(0, 0, 0, 0) 53%);
+            background-size: 20px 20px, 20px auto;
+            background-repeat: repeat-x;
+            background-position: center bottom, center -5px;
+        }
+
+        .loader-5::before,
+        .loader-5::after {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 20px;
+            height: 45px;
+            background: radial-gradient(ellipse at center, #fff 69%, rgba(0, 0, 0, 0) 70%),
+                linear-gradient(to right, rgba(0, 0, 0, 0) 47%, #fff 48%, #fff 52%, rgba(0, 0, 0, 0) 53%);
+            background-size: 20px 20px, 20px auto;
+            background-repeat: no-repeat;
+            background-position: center bottom, center -5px;
+            transform: rotate(0deg);
+            transform-origin: 50% 0%;
+            animation: animPend1 1s linear infinite alternate;
+
+        }
+
+        .loader-5::after {
+            animation: animPend2 1s linear infinite alternate;
+            left: 100%;
+        }
+
+        .loader-6 {
+            width: 48px;
+            height: 12px;
+            background: #FFF;
+            display: inline-block;
+            position: relative;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .loader-6::after {
+            content: '';
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%, 0);
+            position: absolute;
+            border: 15px solid transparent;
+            border-top-color: #fff;
+            animation: bump 0.4s ease-in-out infinite alternate;
+        }
+
+        .loader-6::before {
+            content: '';
+            left: 50%;
+            bottom: 25px;
+            transform: translate(-50%, 0);
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #fff;
+            animation: bump 0.4s ease-in-out infinite alternate;
+        }
+
+        .loader-7 {
+            width: 48px;
+            height: 48px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .loader-7::before {
+            content: "";
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #FFF;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: animloader7 2s ease-in-out infinite;
+        }
+
+        .loader-8 {
+            width: 48px;
+            height: 48px;
+            display: inline-block;
+            position: relative;
+            border: 3px solid #FFF;
+            border-radius: 50%;
+            animation: animloader8 2s linear infinite;
+        }
+
+        .loader-8::before {
+            content: "";
+            width: 6px;
+            height: 24px;
+            background: #FFF;
+            transform: rotate(-45deg);
+            position: absolute;
+            bottom: -20px;
+            left: 46px;
+        }
+
+        .loader-9 {
+            width: 48px;
+            height: 40px;
+            display: inline-block;
+            position: relative;
+            background: #fff;
+            border-radius: 15% 15% 35% 35%;
+            margin-left: -15px;
+            margin-top: 15px;
+        }
+
+        .loader-9::after {
+            content: '';
+            position: absolute;
+            left: 45px;
+            top: 5px;
+            border: 4px solid #fff;
+            width: 16px;
+            height: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .loader-9::before {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 10px;
+            color: #fff;
+            top: -15px;
+            left: 11px;
+            animation: animloader9 1s ease infinite;
+        }
+
+        .item:nth-child(2n + 1) {
+            background: #242424
+        }
+
+        .item:hover {
+            background: #676666
+        }
+
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes zero {
+            0% {
+                transform: scale(1) rotate(0deg)
+            }
+
+            100% {
+                transform: scale(0) rotate(360deg)
+            }
+        }
+
+        @keyframes animloader {
+            0% {
+                height: 50px;
+            }
+
+            100% {
+                height: 50px / 10;
+            }
+        }
+
+        @keyframes animPend1 {
+            0% {
+                transform: rotate(22deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes animPend2 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(-22deg);
+            }
+        }
+
+        @keyframes bump {
+            0% {
+                transform: translate(-50%, 5px)
+            }
+
+            100% {
+                transform: translate(-50%, -5px)
+            }
+        }
+
+        @keyframes animloader7 {
+
+            0%,
+            100% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes animloader8 {
+            0% {
+                transform: translate(-10px, -10px)
+            }
+
+            25% {
+                transform: translate(-10px, 10px)
+            }
+
+            50% {
+                transform: translate(10px, 10px)
+            }
+
+            75% {
+                transform: translate(10px, -10px)
+            }
+
+            100% {
+                transform: translate(-10px, -10px)
+            }
+        }
+
+        @keyframes animloader9 {
+            0% {
+                box-shadow: 2px 0px #fff, 12px 0px rgba(#fff, 0.3), 20px 0px #fff
+            }
+
+            50% {
+                box-shadow: 2px -5px rgba(#fff, 0.5), 12px -3px rgba(#fff, 0.5), 20px -2px rgba(#fff, 0.6)
+            }
+
+            100% {
+                box-shadow: 2px -8px #fff, 12px -5px #fff, 20px -5px #fff
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 标题 -->
+        <div class="title">
+            <span>九种常用加载动画</span>
+        </div>
+        <!-- 展示效果 -->
+        <div class="effect">
+            <div class="loading">
+                <div class="item">
+                    <i class="loader-1"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-2"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-3"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-4"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-5"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-6"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-7"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-8"></i>
+                </div>
+                <div class="item">
+                    <i class="loader-9"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

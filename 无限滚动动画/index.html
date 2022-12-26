@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>CSS无限滚动动画</title>
+    <style>
+        /* 修改默认配置 根据需要添加，正式代码在下面 */
+        html,
+        body,
+        div,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: inherit;
+            font-family: inherit;
+            font-style: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        menu,
+        nav,
+        section {
+            display: block
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+        blockquote:before,
+        blockquote:after,
+        q:before,
+        q:after {
+            content: "";
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        @font-face {
+            font-family: AlimamaShuHeiTi-Bold;
+            src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.eot) format('embedded-opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.otf) format('opentype'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf) format('TrueType'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff) format('woff'),
+                url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.woff2) format('woff2');
+        }
+
+        html,
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            background: #121212;
+            color: white;
+            font-family: AlimamaShuHeiTi-Bold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: initial;
+            letter-spacing: initial;
+            min-height: 704px
+        }
+
+        button {
+            font-family: AlimamaShuHeiTi-Bold
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        *::-moz-selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+
+        *::selection {
+            background: rgba(255, 255, 255, .99);
+            color: #121212
+        }
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .wrap {
+            align-content: flex-start;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title {
+            width: 100%;
+            display: flex;
+            padding: 30px;
+        }
+
+        .title span {
+            font-size: 40px;
+            font-family: AlimamaShuHeiTi-Bold;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .effect {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            position: relative;
+            margin: auto;
+        }
+
+        .loop-wrap {
+            width: 30rem;
+            display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loop {
+            display: flex;
+            width: fit-content;
+            animation-name: loop;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: var(--direction);
+            animation-duration: var(--duration);
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 0 0.2rem;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            background-color: #334155;
+            border-radius: 0.4rem;
+            padding: 0.7rem 1rem;
+            margin-right: 1rem;
+            box-shadow: 0 0.1rem 0.2rem rgb(0 0 0 / 20%), 0 0.1rem 0.5rem rgb(0 0 0 / 30%), 0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+            height: 40px;
+        }
+
+        .tag span {
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .fade {
+            pointer-events: none;
+            background: linear-gradient(90deg, #121212, transparent 30%, transparent 70%, #121212);
+            position: absolute;
+            inset: 0;
+        }
+
+        @keyframes loop {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .code {
+            padding: 25px 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .code img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 标题 -->
+        <div class="title">
+            <span>无限滚动动画</span>
+        </div>
+        <!-- 展示效果 -->
+        <div class="effect">
+            <div class="loop-wrap">
+                <div class="loop">
+                    <div class="tag"><span>#</span>Typescript</div>
+                    <div class="tag"><span>#</span>Javascript</div>
+                    <div class="tag"><span>#</span>HTML</div>
+                    <div class="tag"><span>#</span>CSS</div>
+                    <div class="tag"><span>#</span>React</div>
+                    <div class="tag"><span>#</span>Vue</div>
+                    <div class="tag"><span>#</span>Typescript</div>
+                    <div class="tag"><span>#</span>Javascript</div>
+                    <div class="tag"><span>#</span>HTML</div>
+                    <div class="tag"><span>#</span>CSS</div>
+                    <div class="tag"><span>#</span>React</div>
+                    <div class="tag"><span>#</span>Vue</div>
+                </div>
+                <div class="loop">
+                    <div class="tag"><span>#</span>Python</div>
+                    <div class="tag"><span>#</span>PHP</div>
+                    <div class="tag"><span>#</span>Java</div>
+                    <div class="tag"><span>#</span>Golang</div>
+                    <div class="tag"><span>#</span>.Net</div>
+                    <div class="tag"><span>#</span>NodeJS</div>
+                    <div class="tag"><span>#</span>Python</div>
+                    <div class="tag"><span>#</span>PHP</div>
+                    <div class="tag"><span>#</span>Java</div>
+                    <div class="tag"><span>#</span>Golang</div>
+                    <div class="tag"><span>#</span>.Net</div>
+                    <div class="tag"><span>#</span>NodeJS</div>
+                </div>
+                <div class="loop">
+                    <div class="tag"><span>#</span>Mysql</div>
+                    <div class="tag"><span>#</span>PostgreSQL</div>
+                    <div class="tag"><span>#</span>Oracle</div>
+                    <div class="tag"><span>#</span>SQLServer</div>
+                    <div class="tag"><span>#</span>Redis</div>
+                    <div class="tag"><span>#</span>Memcached</div>
+                    <div class="tag"><span>#</span>Mysql</div>
+                    <div class="tag"><span>#</span>PostgreSQL</div>
+                    <div class="tag"><span>#</span>Oracle</div>
+                    <div class="tag"><span>#</span>SQLServer</div>
+                    <div class="tag"><span>#</span>Redis</div>
+                    <div class="tag"><span>#</span>Memcached</div>
+                </div>
+                <div class="fade"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const loop = document.querySelectorAll('.wrap .loop')
+    loop.forEach((val, key) => {
+        let number = Math.floor(Math.random() * (20000 - 15000)) + 15000
+        if (key === 1) {
+            val.setAttribute('style', '--direction:reverse;--duration: ' + number + 'ms')
+        } else {
+            val.setAttribute('style', '--direction:normal;--duration: ' + number + 'ms')
+        }
+    })
+</script>
+
+</html>
